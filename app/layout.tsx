@@ -15,8 +15,8 @@ const workSans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Next Start Kit",
-  description: "Next.js + Supabase + Tailwind starter kit",
+  title: "Travel Plan",
+  description: "Travel Plan",
 };
 
 export default function RootLayout({
