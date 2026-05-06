@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/app/lib/supabase/server";
 import { getAuthUser } from "@/app/lib/auth";
 import type { Trip } from "@/app/lib/types/trip";
+import { AppNav } from "@/app/components/AppNav";
 import { LogoutButton } from "./logout-button";
 
 export const dynamic = "force-dynamic";
@@ -21,7 +22,8 @@ export default async function DashboardPage() {
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-12">
-      <header className="flex items-center justify-between">
+      <AppNav />
+      <header className="mt-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-semibold text-slate-900">내 여행</h1>
           <p className="mt-1 text-sm text-slate-600">{user.email}</p>
