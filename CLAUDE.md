@@ -1,11 +1,5 @@
 @AGENTS.md
 
-## Project Context
-
-This repository is a **start kit (boilerplate)**. It is intended to be cloned and used as the foundation for new Next.js projects, not as a standalone product. Stack: Next.js 16 + Supabase + Tailwind CSS 4 + TypeScript.
-
-When adding code, prefer minimal, generic, reusable patterns over project-specific logic. Avoid feature creep — keep scope appropriate for a starter template.
-
 ## Coding Guidelines
 
 Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
