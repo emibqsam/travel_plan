@@ -1,16 +1,25 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { createClient } from "@/app/lib/supabase/client";
+// MOCK AUTH: 복구 시 주석 해제
+// import { createClient } from "@/app/lib/supabase/client";
 
 export function LogoutButton() {
   const router = useRouter();
-  async function handleLogout() {
-    const supabase = createClient();
-    await supabase.auth.signOut();
+
+  // MOCK AUTH: 원래 Supabase signOut — 복구 시 주석 해제하고 아래 mock handler 제거
+  // async function handleLogout() {
+  //   const supabase = createClient();
+  //   await supabase.auth.signOut();
+  //   router.push("/login");
+  //   router.refresh();
+  // }
+
+  function handleLogout() {
     router.push("/login");
     router.refresh();
   }
+
   return (
     <button
       onClick={handleLogout}

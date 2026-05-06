@@ -23,3 +23,25 @@ body {
   color: var(--foreground);
   font-family: var(--font-work-sans), system-ui, sans-serif;
 }
+
+/* Leaflet: Tailwind preflight resets `img { max-width: 100% }` which breaks tile sizing. */
+.leaflet-container img {
+  max-width: none !important;
+}
+.leaflet-container {
+  background: #e5e7eb;
+}
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+}

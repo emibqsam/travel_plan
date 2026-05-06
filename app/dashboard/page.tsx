@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { createClient } from "@/app/lib/supabase/server";
+// MOCK AUTH: 복구 시 주석 해제
+// import { createClient } from "@/app/lib/supabase/server";
 import { getAuthUser } from "@/app/lib/auth";
 import type { Trip } from "@/app/lib/types/trip";
 import { AppNav } from "@/app/components/AppNav";
@@ -12,13 +13,16 @@ export default async function DashboardPage() {
   const user = await getAuthUser();
   if (!user) redirect("/login");
 
-  const supabase = await createClient();
-  const { data: trips } = await supabase
-    .from("trips")
-    .select("*")
-    .order("start_date", { ascending: false });
+  // MOCK AUTH: Supabase 미설정 시 trips 쿼리가 hang. 복구 시 아래 mock list 제거하고 주석 해제.
+  const list: Trip[] = [];
 
-  const list = (trips ?? []) as Trip[];
+  // const supabase = await createClient();
+  // const { data: trips } = await supabase
+  //   .from("trips")
+  //   .select("*")
+  //   .order("start_date", { ascending: false });
+  //
+  // const list = (trips ?? []) as Trip[];
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-12">

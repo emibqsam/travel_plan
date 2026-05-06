@@ -1,5 +1,6 @@
 export const APP_NAV = [
   { href: "/dashboard", label: "내 여행" },
+  { href: "/map", label: "지도 루트" },
   { href: "/budget", label: "예산" },
   { href: "/checklist", label: "체크리스트" },
   { href: "/photos", label: "사진/메모" },

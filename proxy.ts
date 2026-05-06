@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { updateSession } from "@/app/lib/supabase/middleware";
-import { AUTH_ROUTES, PROTECTED_ROUTES } from "@/app/lib/constants";
+// MOCK AUTH: 원래 Supabase 세션 가드 — 복구 시 아래 주석 해제
+// import { updateSession } from "@/app/lib/supabase/middleware";
+// import { AUTH_ROUTES, PROTECTED_ROUTES } from "@/app/lib/constants";
 
 const ALLOWED_ORIGINS = (process.env.CORS_ORIGIN || "http://localhost:3000")
   .split(",")
@@ -81,27 +82,29 @@ export async function proxy(request: NextRequest) {
     return applyCors(request, res);
   }
 
-  // Supabase session refresh + auth gating (non-API routes)
-  const { user, supabaseResponse } = await updateSession(request);
+  // MOCK AUTH: Supabase 세션 가드 비활성화. 복구 시 아래 블록 주석 해제하고 위 return 제거.
+  return NextResponse.next({ request });
 
-  const isProtected = PROTECTED_ROUTES.some((route) => pathname.startsWith(route));
-  if (isProtected && !user) {
-    const url = request.nextUrl.clone();
-    url.pathname = AUTH_ROUTES.LOGIN;
-    url.searchParams.set("redirectTo", pathname);
-    return NextResponse.redirect(url);
-  }
-
-  const isAuthRoute = Object.values(AUTH_ROUTES).some((route) =>
-    pathname.startsWith(route),
-  );
-  if (isAuthRoute && user) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
-    return NextResponse.redirect(url);
-  }
-
-  return supabaseResponse;
+  // const { user, supabaseResponse } = await updateSession(request);
+  //
+  // const isProtected = PROTECTED_ROUTES.some((route) => pathname.startsWith(route));
+  // if (isProtected && !user) {
+  //   const url = request.nextUrl.clone();
+  //   url.pathname = AUTH_ROUTES.LOGIN;
+  //   url.searchParams.set("redirectTo", pathname);
+  //   return NextResponse.redirect(url);
+  // }
+  //
+  // const isAuthRoute = Object.values(AUTH_ROUTES).some((route) =>
+  //   pathname.startsWith(route),
+  // );
+  // if (isAuthRoute && user) {
+  //   const url = request.nextUrl.clone();
+  //   url.pathname = "/dashboard";
+  //   return NextResponse.redirect(url);
+  // }
+  //
+  // return supabaseResponse;
 }
 
 export const config = {
